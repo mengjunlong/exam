@@ -3,23 +3,21 @@ package com.gildedrose;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class TexttestFixture {
     public static void main(String[] args) {
         System.out.println("OMGHAI!");
 
-        Item[] items = new Item[] {
-                new Item("+5 Dexterity Vest", 10, 20), //
-                new Item("Aged Brie", 2, 0), //
-                new Item("Elixir of the Mongoose", 5, 7), //
-                new Item("Sulfuras, Hand of Ragnaros", 0, 80), //
-                new Item("Sulfuras, Hand of Ragnaros", -1, 80),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-                // this conjured item does not work properly yet
-                new Item("Conjured Mana Cake", 3, 6) };
+        Item[] items = new Item[]{
+            Item.createCommonItem("+5 Dexterity Vest", 10, 20), //
+            Item.createAgedBrie(2,0),
+            Item.createCommonItem("Elixir of the Mongoose", 5, 7), //
+            Item.createSulfuras(0,80),
+            Item.createSulfuras(-1,80),
+            Item.createBackstagePasses(15, 20),
+            Item.createBackstagePasses(10, 49),
+            Item.createBackstagePasses(5, 49),
+            // this conjured item does not work properly yet
+            Item.createCommonItem("Conjured Mana Cake", 3, 6)};
 
         GildedRose app = new GildedRose(items);
 
@@ -37,24 +35,23 @@ public class TexttestFixture {
             System.out.println();
             app.updateQuality();
         }
-        assertEquals("fixme", getBaseResult());
     }
 
     public static String getBaseResult() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(outputStream);
         printStream.println("OMGHAI!");
-        Item[] items = new Item[] {
-                new Item("+5 Dexterity Vest", 10, 20), //
-                new Item("Aged Brie", 2, 0), //
-                new Item("Elixir of the Mongoose", 5, 7), //
-                new Item("Sulfuras, Hand of Ragnaros", 0, 80), //
-                new Item("Sulfuras, Hand of Ragnaros", -1, 80),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-                // this conjured item does not work properly yet
-                new Item("Conjured Mana Cake", 3, 6) };
+        Item[] items = new Item[]{
+            Item.createCommonItem("+5 Dexterity Vest", 10, 20), //
+            Item.createAgedBrie(2,0),
+            Item.createCommonItem("Elixir of the Mongoose", 5, 7), //
+            Item.createSulfuras(0,80),
+            Item.createSulfuras(-1,80),
+            Item.createBackstagePasses(15, 20),
+            Item.createBackstagePasses(10, 49),
+            Item.createBackstagePasses(5, 49),
+            // this conjured item does not work properly yet
+            Item.createCommonItem("Conjured Mana Cake", 3, 6)};
 
         GildedRose app = new GildedRose(items);
         int days = 2;

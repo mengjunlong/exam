@@ -8,7 +8,23 @@ public class Item {
 
     public int quality;
 
-    public Item(String name, int sellIn, int quality) {
+    public static Item createBackstagePasses(int sellIn, int quality) {
+        return new Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality);
+    }
+
+    public static Item createAgedBrie(int sellIn, int quality) {
+        return new Item("Aged Brie",sellIn, quality);
+    }
+
+    public static Item createSulfuras(int sellIn, int quality) {
+        return new Item("Sulfuras, Hand of Ragnaros",sellIn, quality);
+    }
+
+    public static Item createCommonItem(String name, int sellIn, int quality) {
+        return new Item(name, sellIn, quality);
+    }
+
+    private Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
@@ -20,6 +36,14 @@ public class Item {
     }
 
     public void updateItemQualityPerDay() {
+        updateItemQuality();
+        updateItemSellIn();
+        if (isExpired()) {
+            updateItemQualityAfterExpire();
+        }
+    }
+
+    private void updateItemQuality() {
         if (!isAgedBrie()
             && !isBackstagePasses()) {
             if (quality > 0) {
@@ -46,27 +70,33 @@ public class Item {
                 }
             }
         }
+    }
 
-        if (!isSulfuras()) {
-            sellIn = sellIn - 1;
-        }
-
-        if (sellIn < 0) {
-            if (!isAgedBrie()) {
-                if (!isBackstagePasses()) {
-                    if (quality > 0) {
-                        if (!isSulfuras()) {
-                            quality = quality - 1;
-                        }
+    private void updateItemQualityAfterExpire() {
+        if (!isAgedBrie()) {
+            if (!isBackstagePasses()) {
+                if (quality > 0) {
+                    if (!isSulfuras()) {
+                        quality = quality - 1;
                     }
-                } else {
-                    quality = 0;
                 }
             } else {
-                if (quality < 50) {
-                    quality = quality + 1;
-                }
+                quality = 0;
             }
+        } else {
+            if (quality < 50) {
+                quality = quality + 1;
+            }
+        }
+    }
+
+    private boolean isExpired() {
+        return sellIn < 0;
+    }
+
+    private void updateItemSellIn() {
+        if (!isSulfuras()) {
+            sellIn = sellIn - 1;
         }
     }
 
