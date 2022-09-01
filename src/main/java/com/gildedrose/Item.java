@@ -28,34 +28,30 @@ public class Item {
     }
 
     protected void updateItemQuality() {
+        decreaseQuality();
+    }
+
+    private void decreaseQuality() {
         if (quality > 0) {
             quality = quality - 1;
         }
     }
 
     protected void updateItemQualityAfterExpire() {
-        if (quality > 0) {
-            quality = quality - 1;
-        }
-    }
-
-    private boolean isExpired() {
-        return sellIn < 0;
+        decreaseQuality();
     }
 
     protected void updateItemSellIn() {
         sellIn = sellIn - 1;
     }
 
-    protected boolean isSulfuras() {
-        return false;
+    private boolean isExpired() {
+        return sellIn < 0;
     }
 
-    protected boolean isBackstagePass() {
-        return false;
-    }
-
-    protected boolean isAgedBrie() {
-        return false;
+    protected void increaseQuality() {
+        if (quality < 50) {
+            quality = quality + 1;
+        }
     }
 }
