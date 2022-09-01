@@ -27,50 +27,15 @@ public class Item {
         }
     }
 
-    private void updateItemQuality() {
-        if (!isAgedBrie()
-            && !isBackstagePass()) {
-            if (quality > 0) {
-                if (!isSulfuras()) {
-                    quality = quality - 1;
-                }
-            }
-        } else {
-            if (quality < 50) {
-                quality = quality + 1;
-
-                if (isBackstagePass()) {
-                    if (sellIn < 11) {
-                        if (quality < 50) {
-                            quality = quality + 1;
-                        }
-                    }
-
-                    if (sellIn < 6) {
-                        if (quality < 50) {
-                            quality = quality + 1;
-                        }
-                    }
-                }
-            }
+    protected void updateItemQuality() {
+        if (quality > 0) {
+            quality = quality - 1;
         }
     }
 
-    private void updateItemQualityAfterExpire() {
-        if (!isAgedBrie()) {
-            if (!isBackstagePass()) {
-                if (quality > 0) {
-                    if (!isSulfuras()) {
-                        quality = quality - 1;
-                    }
-                }
-            } else {
-                quality = 0;
-            }
-        } else {
-            if (quality < 50) {
-                quality = quality + 1;
-            }
+    protected void updateItemQualityAfterExpire() {
+        if (quality > 0) {
+            quality = quality - 1;
         }
     }
 
@@ -78,10 +43,8 @@ public class Item {
         return sellIn < 0;
     }
 
-    private void updateItemSellIn() {
-        if (!isSulfuras()) {
-            sellIn = sellIn - 1;
-        }
+    protected void updateItemSellIn() {
+        sellIn = sellIn - 1;
     }
 
     protected boolean isSulfuras() {

@@ -13,4 +13,18 @@ public class AgedBrie extends Item {
     protected boolean isAgedBrie() {
         return true;
     }
+
+    @Override
+    public void updateItemQualityAfterExpire() {
+        if (quality < 50) {
+            quality = quality + 1;
+        }
+    }
+
+    @Override
+    protected void updateItemQuality() {
+        if (quality < 50) {
+            quality = quality + 1;
+        }
+    }
 }
