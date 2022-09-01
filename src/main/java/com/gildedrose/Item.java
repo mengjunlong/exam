@@ -8,23 +8,7 @@ public class Item {
 
     public int quality;
 
-    public static Item createBackstagePasses(int sellIn, int quality) {
-        return new Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality);
-    }
-
-    public static Item createAgedBrie(int sellIn, int quality) {
-        return new Item("Aged Brie",sellIn, quality);
-    }
-
-    public static Item createSulfuras(int sellIn, int quality) {
-        return new Item("Sulfuras, Hand of Ragnaros",sellIn, quality);
-    }
-
-    public static Item createCommonItem(String name, int sellIn, int quality) {
-        return new Item(name, sellIn, quality);
-    }
-
-    private Item(String name, int sellIn, int quality) {
+    protected Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
@@ -45,7 +29,7 @@ public class Item {
 
     private void updateItemQuality() {
         if (!isAgedBrie()
-            && !isBackstagePasses()) {
+            && !isBackstagePass()) {
             if (quality > 0) {
                 if (!isSulfuras()) {
                     quality = quality - 1;
@@ -55,7 +39,7 @@ public class Item {
             if (quality < 50) {
                 quality = quality + 1;
 
-                if (isBackstagePasses()) {
+                if (isBackstagePass()) {
                     if (sellIn < 11) {
                         if (quality < 50) {
                             quality = quality + 1;
@@ -74,7 +58,7 @@ public class Item {
 
     private void updateItemQualityAfterExpire() {
         if (!isAgedBrie()) {
-            if (!isBackstagePasses()) {
+            if (!isBackstagePass()) {
                 if (quality > 0) {
                     if (!isSulfuras()) {
                         quality = quality - 1;
@@ -100,15 +84,15 @@ public class Item {
         }
     }
 
-    private boolean isSulfuras() {
-        return name.equals("Sulfuras, Hand of Ragnaros");
+    protected boolean isSulfuras() {
+        return false;
     }
 
-    private boolean isBackstagePasses() {
-        return name.equals("Backstage passes to a TAFKAL80ETC concert");
+    protected boolean isBackstagePass() {
+        return false;
     }
 
-    private boolean isAgedBrie() {
-        return name.equals("Aged Brie");
+    protected boolean isAgedBrie() {
+        return false;
     }
 }
