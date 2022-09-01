@@ -31,9 +31,9 @@ public class Item {
         decreaseQuality();
     }
 
-    private void decreaseQuality() {
-        if (quality > 0) {
-            quality = quality - 1;
+    protected void increaseQuality() {
+        if (quality < 50) {
+            quality = quality + 1;
         }
     }
 
@@ -45,13 +45,14 @@ public class Item {
         sellIn = sellIn - 1;
     }
 
+    private void decreaseQuality() {
+        if (quality > 0) {
+            quality = quality - 1;
+        }
+    }
+
     private boolean isExpired() {
         return sellIn < 0;
     }
 
-    protected void increaseQuality() {
-        if (quality < 50) {
-            quality = quality + 1;
-        }
-    }
 }
